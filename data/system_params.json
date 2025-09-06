@@ -1,0 +1,10 @@
+{
+    "total_bandwidth_hz": 2000000000.0,
+    "num_channels": 25,
+    "channel_bandwidth_hz": 80000000.0,
+    "eirp_dbw": 37.7,
+    "grx_dbi": 37.7,
+    "noise_temperature_k": 290,
+    "boltzmann": 1.38e-23,
+    "alpha": 1
+}
