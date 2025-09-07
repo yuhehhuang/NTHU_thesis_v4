@@ -1,0 +1,57 @@
+=== RUNNING draw_data_rates_vs_users.py ===
+SCRIPT_PATH : C:\Users\yuheh\thesis_v4\src\draw_data_rates_vs_users.py
+PYTHON      : 3.11.5
+PROJECT_ROOT: C:\Users\yuheh\thesis_v4
+RESULTS_DIR : C:\Users\yuheh\thesis_v4\results
+TRACE_PATH  : C:\Users\yuheh\thesis_v4\results\trace_draw_data_rates_vs_users.txt
+==========================================
+Target: W=3, alpha=1.0, users list=[100, 150, 200, 250, 300]
+
+Users=100 -> candidates: 1
+  - avg_user_data_rate_W3_users100_α1.csv
+  [pick α=1] (1)
+   -> avg_user_data_rate_W3_users100_α1.csv
+
+Users=150 -> candidates: 1
+  - avg_user_data_rate_W3_users150_α1.csv
+  [pick α=1] (1)
+   -> avg_user_data_rate_W3_users150_α1.csv
+
+Users=200 -> candidates: 1
+  - avg_user_data_rate_W3_users200_α1.csv
+  [pick α=1] (1)
+   -> avg_user_data_rate_W3_users200_α1.csv
+
+Users=250 -> candidates: 1
+  - avg_user_data_rate_W3_users250_α1.csv
+  [pick α=1] (1)
+   -> avg_user_data_rate_W3_users250_α1.csv
+
+Users=300 -> candidates: 1
+  - avg_user_data_rate_W3_users300_α1.csv
+  [pick α=1] (1)
+   -> avg_user_data_rate_W3_users300_α1.csv
+[read] users=100 <- avg_user_data_rate_W3_users100_α1.csv
+[use ] avg_user_data_rate_W3_users100_α1.csv  method_col='method', rate_col='avg_user_data_rate'
+[read] users=150 <- avg_user_data_rate_W3_users150_α1.csv
+[use ] avg_user_data_rate_W3_users150_α1.csv  method_col='method', rate_col='avg_user_data_rate'
+[read] users=200 <- avg_user_data_rate_W3_users200_α1.csv
+[use ] avg_user_data_rate_W3_users200_α1.csv  method_col='method', rate_col='avg_user_data_rate'
+[read] users=250 <- avg_user_data_rate_W3_users250_α1.csv
+[use ] avg_user_data_rate_W3_users250_α1.csv  method_col='method', rate_col='avg_user_data_rate'
+[read] users=300 <- avg_user_data_rate_W3_users300_α1.csv
+[use ] avg_user_data_rate_W3_users300_α1.csv  method_col='method', rate_col='avg_user_data_rate'
+
+彙總表 (users x method):
+               dp         ga     greedy   hungarian       mslb
+users                                                         
+100    105.544365  99.362544  89.574208  105.474972  93.084321
+150     72.758737  61.375890  62.469834   83.978620  62.694088
+200     65.495162  56.414959  52.473105   81.130795  53.580366
+250     52.585319  44.518883  40.118755   74.880254  48.947161
+300     39.003556  35.710537  33.815122   55.850221  34.414466
+
+[summary] trace file   : results\trace_draw_data_rates_vs_users.txt
+[summary] fallback log: C:\Users\yuheh\thesis_v4\trace_fallback.txt
+已儲存彙總 CSV: results\avg_user_data_rate_vs_users_W3_alpha1.csv
+已儲存圖檔: results\avg_user_data_rate_vs_users_W3_alpha1.png

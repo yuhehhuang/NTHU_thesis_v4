@@ -4,34 +4,41 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # ==== 參數設定（可自行修改）====
-W = 2
-alpha = 1
+W = 3
+alpha = 0
+USERS = 100
 folder_path = "results"  # 結果資料夾
 save_png = True
 save_csv = True
 alpha_symbol = "\u03B1"  # α 的 Unicode
-out_png = f"avg_user_data_rate_W{W}_{alpha_symbol}{alpha}.png"
-out_csv = f"avg_user_data_rate_W{W}_{alpha_symbol}{alpha}.csv"
+out_png = f"avg_user_data_rate_W{W}_users{USERS}{alpha_symbol}{alpha}.png"
+out_csv = f"avg_user_data_rate_W{W}_users{USERS}_{alpha_symbol}{alpha}.csv"
 
-# ==== 檔案搜尋 ====
-pattern = f"**/*_W{W}_alpha{alpha}_*data_rates.csv"
-files = glob.glob(os.path.join(folder_path, pattern), recursive=True)
+# ==== 檔案搜尋（只抓 real data rate）====
+patterns = [
+    f"**/*_W{W}_users{USERS}_alpha{alpha}_real_*data_rate*.csv",
+    f"**/*_W{W}_users{USERS}_α{alpha}_real_*data_rate*.csv",
+]
+files = []
+for p in patterns:
+    files.extend(glob.glob(os.path.join(folder_path, p), recursive=True))
+
+# 去重、排序
+files = sorted(set(files))
 
 if not files:
+    tried = "\n  - " + "\n  - ".join(patterns)
     raise FileNotFoundError(
-        f"找不到符合樣式的檔案：{pattern}\n"
+        "找不到符合樣式的 **real data rate** 檔案。\n"
+        f"嘗試的樣式：{tried}\n"
         f"請確認 W={W}, alpha={alpha}，以及檔案是否在 '{os.path.abspath(folder_path)}' 裡。"
     )
 
-print("找到以下檔案：")
+print("找到以下 real data rate 檔案：")
 for f in files:
     print(" -", os.path.relpath(f))
 
 # ==== 幫助函式 ====
-#把整條路徑只取出「檔名本身」
-#filepath = "results/dp_opti_W2_alpha1_real_data_rates.csv"
-#base = "dp_opti_W2_alpha1_real_data_rates.csv"
-####################################################
 def infer_method_name(filepath: str) -> str:
     base = os.path.basename(filepath)
     if f"_W{W}_" in base:
@@ -54,8 +61,6 @@ for file in files:
     per_user_mean = df.groupby("user_id")["data_rate"].mean()
     method_avg = per_user_mean.mean()
     method_to_avg[method] = float(method_avg)
-
-# ==== 上帝之手調整 ====
 
 # ==== 排序 ====
 ordered_methods = []
@@ -84,7 +89,7 @@ plt.title(f"Average User Data Rate per Method (W={W}, {alpha_symbol}={alpha})", 
 plt.xlabel("Method", fontsize=12)
 plt.ylabel("Average User Data Rate (Mbps)", fontsize=12)
 plt.xticks(rotation=20)
-plt.grid(axis='y', linestyle='--', alpha=0.6)  # 背景虛線
+plt.grid(axis='y', linestyle='--', alpha=0.6)
 
 # 在柱子上顯示數值
 for bar, value in zip(bars, avg_values):

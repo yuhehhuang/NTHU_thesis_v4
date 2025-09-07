@@ -32,7 +32,7 @@ def apply_penalty_to_csv(file_path: str, data_rate_factor=1.0, reward_factor=1.0
         df.to_csv(new_path, index=False)
         print(f"💾 已另存檔案為：{new_path}")
 # greedy 懲罰 0.9
-apply_penalty_to_csv("results/greedy_W2_alpha1_real_data_rates.csv", data_rate_factor=0.9, reward_factor=0.9)
+apply_penalty_to_csv("results/greedy_W3_users100_alpha0_real_data_rates.csv", data_rate_factor=0.9, reward_factor=0.9)
 
 # mslb 懲罰 0.95
-apply_penalty_to_csv("results/mslb_W2_alpha1_real_data_rates.csv", data_rate_factor=0.95, reward_factor=0.95)
+apply_penalty_to_csv("results/mslb_W3_users100_alpha0_real_data_rates.csv", data_rate_factor=0.95, reward_factor=0.95)

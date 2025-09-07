@@ -27,7 +27,7 @@ sat_channel_dict_backup = system["sat_channel_dict_backup"]
 sat_positions = system["sat_positions"]
 
 # 設定 W 與 alpha
-W = 3  ############你要手動設定##############################
+W = 1  ############你要手動設定##############################
 alpha = params["alpha"]  ############你要手動設定,去src/parameter.py設定##############################
 
 # === 2️⃣ 執行對應的方法 ===

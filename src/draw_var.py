@@ -4,15 +4,16 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # ==== 參數設定 ====
-W = 2
+W = 3
 alpha = 1
+USERS=100
 folder_path = "results"  # 結果資料夾
 save_png = True
 alpha_symbol = "\u03B1"  # α
 out_png = f"avg_load_variance_W{W}_{alpha_symbol}{alpha}.png"
 
 # ==== 檔案搜尋 ====
-pattern = f"**/*_W{W}_alpha{alpha}_*load_by_time.csv"
+pattern = f"**/*_W{W}_users{USERS}_alpha{alpha}_*load_by_time.csv"
 files = glob.glob(os.path.join(folder_path, pattern), recursive=True)
 
 if not files:

@@ -4,14 +4,15 @@ import glob
 import pandas as pd
 
 # ================== 參數設定（自行修改） ==================
-W = 2
+W = 3
 alpha = 1
+USERS =  100
 folder_path = "results"        # 你的結果都在這裡
-out_csv = f"avg_reward_W{W}_alpha{alpha}.csv"
+out_csv = f"avg_reward_W{W}_users{USERS}_alpha{alpha}.csv"
 # ========================================================
 
 # 目標：抓像 dp_opti_W2_alpha1_real_data_rates.csv 這類檔名
-pattern_data = f"**/*_W{W}_alpha{alpha}_*real_data_rates.csv"
+pattern_data = f"**/*_W{W}_users{USERS}_alpha{alpha}_*real_data_rates.csv"
 files_data = glob.glob(os.path.join(folder_path, pattern_data), recursive=True)
 
 if not files_data:
@@ -97,7 +98,7 @@ for file_data in files_data:
 
     # === 儲存合併後的資料到 results/merged/ ===
     os.makedirs("results/merged", exist_ok=True)
-    merged_out_path = f"results/merged/{method}_W{W}_alpha{alpha}_merged.csv"
+    merged_out_path = f"results/merged/{method}_W{W}_users{USERS}_alpha{alpha}_merged.csv"
     merged.to_csv(merged_out_path, index=False)
     print(f"[儲存] 合併後資料寫入：{merged_out_path}")
 
