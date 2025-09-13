@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 # ==== 參數設定（可自行修改）====
 W = 3
-alpha = 0
+alpha = 0.25
 USERS = 100
 folder_path = "results"  # 結果資料夾
 save_png = True

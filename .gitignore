@@ -1,5 +1,4 @@
 *.pkl
-*.csv
 *.pyc
 __pycache__/
 data/satellite_positions.pkl

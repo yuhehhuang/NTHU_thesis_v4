@@ -8,7 +8,7 @@ params = {
     "grx_dbi": 37.7,
     "noise_temperature_k": 290,
     "boltzmann": 1.38e-23,
-    "alpha" : 1
+    "alpha" : 0.25
 }
 
 with open("data/system_params.json", "w") as f:

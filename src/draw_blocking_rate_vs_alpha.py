@@ -175,7 +175,7 @@ plt.title(f"Blocking rate vs alpha (W={W_VALUE}, users={USERS})")
 plt.grid(True, linestyle="--", alpha=0.3)
 plt.legend(title="Method")
 plt.tight_layout()
-plt.ylim(0, 0.2)
+plt.ylim(0, 0.15)
 
 # save & show
 plt.savefig(OUT_PNG, dpi=200)
