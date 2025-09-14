@@ -1,0 +1,11 @@
+timestamp,prefix,trial,n_bg,min_dur,max_dur,mode,blocked,total,blocking_rate
+2025-09-14T20:00:26,dp_W2_users250_alpha1,0,500,1,10,stick_until_invisible,87,500,0.174
+2025-09-14T20:00:26,dp_W2_users250_alpha1,1,500,1,10,stick_until_invisible,80,500,0.16
+2025-09-14T20:00:26,dp_W2_users250_alpha1,2,500,1,10,stick_until_invisible,84,500,0.168
+2025-09-14T20:00:26,dp_W2_users250_alpha1,3,500,1,10,stick_until_invisible,89,500,0.178
+2025-09-14T20:00:26,dp_W2_users250_alpha1,4,500,1,10,stick_until_invisible,73,500,0.146
+2025-09-14T20:00:26,dp_W2_users250_alpha1,5,500,1,10,stick_until_invisible,81,500,0.162
+2025-09-14T20:00:27,dp_W2_users250_alpha1,6,500,1,10,stick_until_invisible,85,500,0.17
+2025-09-14T20:00:27,dp_W2_users250_alpha1,7,500,1,10,stick_until_invisible,90,500,0.18
+2025-09-14T20:00:27,dp_W2_users250_alpha1,8,500,1,10,stick_until_invisible,93,500,0.186
+2025-09-14T20:00:27,dp_W2_users250_alpha1,9,500,1,10,stick_until_invisible,89,500,0.178

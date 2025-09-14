@@ -23,7 +23,7 @@ from datetime import datetime
 
 # ======== 可調參數 ========
 RESULTS_DIR   = "results"          # 只掃這個資料夾
-TARGET_W      = 3                  # 固定 W=3
+TARGET_W      = 2                  # 固定 W=3
 TARGET_ALPHA  = 1                  # 固定 alpha=1
 METHODS       = ["dp", "greedy", "hungarian", "mslb", "ga"]  # 要畫的演算法（會過濾）
 USER_COUNTS   = [100, 150, 200, 250, 300]  # 若想自動由檔名抓，設為 None

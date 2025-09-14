@@ -107,7 +107,7 @@ def reconstruct_load_by_time_from_paths(prefix, T_guess=None):  # 從 results/{p
 # --------------------------
 # 產生背景使用者清單：支援三種模式
 # --------------------------
-def gen_bg_users(n_bg, T, min_dur=3, max_dur=10, sats=None, df_access=None, mode="stick_until_invisible"):
+def gen_bg_users(n_bg, T, min_dur=5, max_dur=12, sats=None, df_access=None, mode="stick_until_invisible"):
     """
     產生背景 users：
       mode:

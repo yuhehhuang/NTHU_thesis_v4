@@ -8,7 +8,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # ======== 可調參數 ========
-DEFAULT_W = 3
+DEFAULT_W = 2
 DEFAULT_ALPHA = 1.0
 USERS_LIST = [100, 150, 200, 250, 300]
 OUT_DPI = 150

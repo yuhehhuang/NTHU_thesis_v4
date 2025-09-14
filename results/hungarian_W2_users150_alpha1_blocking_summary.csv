@@ -1,0 +1,11 @@
+timestamp,prefix,trial,n_bg,min_dur,max_dur,mode,blocked,total,blocking_rate
+2025-09-14T20:02:57,hungarian_W2_users150_alpha1,0,500,1,10,stick_until_invisible,70,500,0.14
+2025-09-14T20:02:57,hungarian_W2_users150_alpha1,1,500,1,10,stick_until_invisible,54,500,0.108
+2025-09-14T20:02:57,hungarian_W2_users150_alpha1,2,500,1,10,stick_until_invisible,69,500,0.138
+2025-09-14T20:02:57,hungarian_W2_users150_alpha1,3,500,1,10,stick_until_invisible,62,500,0.124
+2025-09-14T20:02:57,hungarian_W2_users150_alpha1,4,500,1,10,stick_until_invisible,66,500,0.132
+2025-09-14T20:02:58,hungarian_W2_users150_alpha1,5,500,1,10,stick_until_invisible,65,500,0.13
+2025-09-14T20:02:58,hungarian_W2_users150_alpha1,6,500,1,10,stick_until_invisible,58,500,0.116
+2025-09-14T20:02:58,hungarian_W2_users150_alpha1,7,500,1,10,stick_until_invisible,65,500,0.13
+2025-09-14T20:02:58,hungarian_W2_users150_alpha1,8,500,1,10,stick_until_invisible,66,500,0.132
+2025-09-14T20:02:58,hungarian_W2_users150_alpha1,9,500,1,10,stick_until_invisible,70,500,0.14

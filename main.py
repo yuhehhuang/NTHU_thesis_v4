@@ -13,9 +13,9 @@ from src.hungarian_new import run_hungarian_new_per_W
 import time
 from datetime import datetime
 # === 方法選擇 ===
-METHOD = "greedy"  # 可選:dp ,greedy ,ga ,mslb,hungarian  ############你要手動設定##############################
+METHOD = "hungarian"  # 可選:dp ,greedy ,ga ,mslb,hungarian  ############你要手動設定##############################
 # 指定要使用哪組 user 檔 (例如 125 -> data/user_info125.csv)
-USER_NUM = 100                     ############你要手動設定##############################
+USER_NUM = 300                     ############你要手動設定##############################
 user_csv = f"data/user_info{USER_NUM}.csv"
 # === 1️⃣ 載入系統資料 ===
 system = load_system_data(regenerate_sat_channels=False, user_csv_path=user_csv)

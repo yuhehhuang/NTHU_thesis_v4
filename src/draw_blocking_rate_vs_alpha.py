@@ -12,7 +12,7 @@ from datetime import datetime
 
 # ---------- 使用設定 ----------
 RESULTS_DIR = "results"                         # results 資料夾
-W_VALUE = 3                                     # 固定 W = 3
+W_VALUE = 2                                     # 固定 W = 3
 USERS = 100                                     # 固定 user = 100
 METHODS = ["dp", "greedy", "hungarian", "mslb", "ga"]  # 要畫的 method 列表
 OUT_CSV = os.path.join(RESULTS_DIR, f"blocking_rate_W{W_VALUE}_users{USERS}_by_alpha.csv")
