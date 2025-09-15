@@ -266,25 +266,36 @@ def main():
     print(result)
 
     # 畫圖：不同方法不同 marker/linestyle；dp 用實線，其餘照 style_map
+    desired_order = ["dp", "ga", "greedy", "hungarian", "mslb"]
     style_map = {
-        "dp":        {"marker": "o", "linestyle": "-"},
-        "greedy":    {"marker": "s", "linestyle": "--"},
-        "hungarian": {"marker": "^", "linestyle": "-."},
-        "mslb":      {"marker": "D", "linestyle": ":"},
-        "ga":        {"marker": "x", "linestyle": (0, (3, 1, 1, 1))},
+        "dp":       {"marker": "o", "linestyle": "-",  "color": "tab:blue"},
+        "ga":       {"marker": "s", "linestyle": "--", "color": "tab:orange"},
+        "greedy":   {"marker": "^", "linestyle": "-.", "color": "tab:green"},
+        "hungarian":{"marker": "D", "linestyle": ":",  "color": "tab:red"},
+        "mslb":     {"marker": "v", "linestyle": (0, (3, 1, 1, 1)), "color": "tab:purple"},
     }
+
 
     plt.figure(figsize=(10,6))
     xs = result.index.values.astype(int)
-    for col in result.columns:
-        ys = result[col].values.astype(float)
+
+    # 支援 column 名稱大小寫不同的情況：建立 mapping
+    colname_map = {c.lower(): c for c in result.columns}
+
+    # 依照 desired_order 畫圖（若某 method 沒在 result.columns 就跳過）
+    for m in desired_order:
+        if m not in colname_map:
+            continue
+        col_actual = colname_map[m]
+        ys = result[col_actual].values.astype(float)
         if np.all(np.isnan(ys)):
             continue
-        style = style_map.get(col.lower(), {"marker": "o", "linestyle": "-"})
+        style = style_map.get(m, {"marker": "o", "linestyle": "-", "color": None})
         plt.plot(xs, ys,
                  marker=style["marker"],
-                 linestyle=style["linestyle"] if col.lower() != "dp" else "-",
-                 linewidth=2, markersize=7, label=col)
+                 linestyle=style["linestyle"],
+                 color=style.get("color"),
+                 linewidth=2, markersize=7, label=col_actual)
 
     plt.xlabel("Number of users")
     plt.ylabel("Variance of load (per-time average)")
@@ -299,7 +310,7 @@ def main():
     out_csv = os.path.join(RESULTS_DIR, f"variance_W{TARGET_W}_alpha{TARGET_ALPHA}_vs_users_summary.csv")
     out_png = os.path.join(RESULTS_DIR, f"variance_W{TARGET_W}_alpha{TARGET_ALPHA}_vs_users_{ts}.png")
     result.to_csv(out_csv, encoding="utf-8-sig")
-    plt.legend(title="Method")
+    plt.legend(title="Method", loc="best")
     plt.savefig(out_png, dpi=OUT_DPI)
 
     print("\n已儲存彙總 CSV：", out_csv)

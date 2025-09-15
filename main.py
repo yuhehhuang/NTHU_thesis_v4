@@ -12,10 +12,12 @@ from src.mslb import run_mslb_batch
 from src.hungarian_new import run_hungarian_new_per_W
 import time
 from datetime import datetime
+from src.pso import run_pso_per_W
+
 # === 方法選擇 ===
-METHOD = "hungarian"  # 可選:dp ,greedy ,ga ,mslb,hungarian  ############你要手動設定##############################
+METHOD = "ga"  # 可選:dp ,greedy ,ga ,mslb,hungarian,pso  ############你要手動設定##############################
 # 指定要使用哪組 user 檔 (例如 125 -> data/user_info125.csv)
-USER_NUM = 300                     ############你要手動設定##############################
+USER_NUM = 100                     ############你要手動設定##############################
 user_csv = f"data/user_info{USER_NUM}.csv"
 # === 1️⃣ 載入系統資料 ===
 system = load_system_data(regenerate_sat_channels=False, user_csv_path=user_csv)
@@ -83,6 +85,18 @@ elif METHOD == "mslb":
         params=params,
         W=W
     )
+elif METHOD == "pso":
+    # 新增：PSO 分支（注意：PSO 需要 df_access 為 DataFrame，不要轉 dict）
+    results_df, all_user_paths, load_by_time = run_pso_per_W(
+        df_users=df_users,
+        df_access=df_access,  # ← 保持 DataFrame
+        path_loss=path_loss,
+        sat_channel_dict_backup=sat_channel_dict_backup,
+        sat_positions=sat_positions,
+        params=params,
+        W=W
+    )
+
 else:
     raise ValueError(f"未知的 METHOD: {METHOD}")
 method_elapsed = time.perf_counter() - method_start 

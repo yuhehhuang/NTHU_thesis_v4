@@ -4,9 +4,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # ==== 參數設定（可自行修改）====
-W = 2
+W = 3
 alpha = 1
-USERS = 300
+USERS = 100
 folder_path = "results"  # 結果資料夾
 save_png = True
 save_csv = True

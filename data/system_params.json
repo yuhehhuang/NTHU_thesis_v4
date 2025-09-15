@@ -6,5 +6,18 @@
     "grx_dbi": 37.7,
     "noise_temperature_k": 290,
     "boltzmann": 1.38e-23,
-    "alpha": 1
+    "alpha": 1,
+    "rate_norm_k": 100.0,
+    "pso_particles": 20,
+    "pso_inertia": 0.72,
+    "pso_c1": 1.25,
+    "pso_c2": 1.25,
+    "pso_vmax": 1.5,
+    "pso_stage_splits": 1,
+    "seed": 42,
+    "pso_iters": 200,
+    "pso_patience": 15,
+    "pso_tol": 1e-4,
+    "pso_time_budget_sec": 6000,
+    "pso_target_score": null
 }

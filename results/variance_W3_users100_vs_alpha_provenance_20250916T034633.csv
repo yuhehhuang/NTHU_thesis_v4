@@ -1,0 +1,26 @@
+﻿status,file,method,alpha,W,users,variance,rows,time_slots,sats,has_time,has_load,file_mtime
+used,results\dp_W3_users100_alpha0.25_load_by_time.csv,dp,0.25,3,100,19.939996962785816,782,40,153,True,True,2025-09-09 03:28:57
+used,results\dp_W3_users100_alpha0.5_load_by_time.csv,dp,0.5,3,100,15.767733433958114,782,40,153,True,True,2025-09-05 00:59:49
+used,results\dp_W3_users100_alpha0.75_load_by_time.csv,dp,0.75,3,100,14.102502763204646,782,40,153,True,True,2025-09-05 14:48:41
+used,results\dp_W3_users100_alpha0_load_by_time.csv,dp,0.0,3,100,22.808019503185072,782,40,153,True,True,2025-09-05 01:14:57
+used,results\dp_W3_users100_alpha1_load_by_time.csv,dp,1.0,3,100,12.052632040228877,782,40,153,True,True,2025-09-05 00:12:10
+used,results\ga_W3_users100_alpha0.25_load_by_time.csv,ga,0.25,3,100,11.89672590190462,782,40,153,True,True,2025-09-09 04:15:00
+used,results\ga_W3_users100_alpha0.5_load_by_time.csv,ga,0.5,3,100,11.745689766848077,782,40,153,True,True,2025-09-05 02:09:49
+used,results\ga_W3_users100_alpha0.75_load_by_time.csv,ga,0.75,3,100,10.599343769424385,782,40,153,True,True,2025-09-05 15:40:03
+used,results\ga_W3_users100_alpha0_load_by_time.csv,ga,0.0,3,100,16.21566130887431,782,40,153,True,True,2025-09-05 03:56:19
+used,results\ga_W3_users100_alpha1_load_by_time.csv,ga,1.0,3,100,10.976497634516221,782,40,153,True,True,2025-09-15 23:19:02
+used,results\greedy_W3_users100_alpha0.25_load_by_time.csv,greedy,0.25,3,100,17.036237192995834,782,40,153,True,True,2025-09-13 18:09:40
+used,results\greedy_W3_users100_alpha0.5_load_by_time.csv,greedy,0.5,3,100,15.688246664603133,782,40,153,True,True,2025-09-05 00:58:56
+used,results\greedy_W3_users100_alpha0.75_load_by_time.csv,greedy,0.75,3,100,14.629835650253046,782,40,153,True,True,2025-09-05 14:47:29
+used,results\greedy_W3_users100_alpha0_load_by_time.csv,greedy,0.0,3,100,19.347089337424208,782,40,153,True,True,2025-09-05 01:12:48
+used,results\greedy_W3_users100_alpha1_load_by_time.csv,greedy,1.0,3,100,13.006607594222501,782,40,153,True,True,2025-09-05 00:10:19
+used,results\hungarian_W3_users100_alpha0.25_load_by_time.csv,hungarian,0.25,3,100,18.99350357703363,782,40,153,True,True,2025-09-13 05:16:00
+used,results\hungarian_W3_users100_alpha0.5_load_by_time.csv,hungarian,0.5,3,100,16.918316999039416,782,40,153,True,True,2025-09-13 05:06:14
+used,results\hungarian_W3_users100_alpha0.75_load_by_time.csv,hungarian,0.75,3,100,15.454780312664912,782,40,153,True,True,2025-09-13 05:04:29
+used,results\hungarian_W3_users100_alpha0_load_by_time.csv,hungarian,0.0,3,100,20.801527903057895,782,40,153,True,True,2025-09-13 16:49:30
+used,results\hungarian_W3_users100_alpha1_load_by_time.csv,hungarian,1.0,3,100,13.4313658511516,782,40,153,True,True,2025-09-13 04:45:46
+used,results\mslb_W3_users100_alpha0.25_load_by_time.csv,mslb,0.25,3,100,16.329735360196274,782,40,153,True,True,2025-09-09 04:00:40
+used,results\mslb_W3_users100_alpha0.5_load_by_time.csv,mslb,0.5,3,100,14.305966798736623,782,40,153,True,True,2025-09-05 01:41:32
+used,results\mslb_W3_users100_alpha0.75_load_by_time.csv,mslb,0.75,3,100,12.640600760247747,782,40,153,True,True,2025-09-05 15:21:09
+used,results\mslb_W3_users100_alpha0_load_by_time.csv,mslb,0.0,3,100,17.28817523486783,782,40,153,True,True,2025-09-13 17:54:27
+used,results\mslb_W3_users100_alpha1_load_by_time.csv,mslb,1.0,3,100,11.818960853109834,782,40,153,True,True,2025-09-05 00:38:17

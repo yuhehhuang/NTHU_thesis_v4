@@ -145,7 +145,7 @@ def main():
     title_alpha = "" if alpha_filter is None else f", alpha={alpha_filter:g}"
     plt.xlabel("Number of users")
     plt.ylabel("Runtime (seconds)")
-    plt.title(f"Runtime vs Users (W={target_w}{title_alpha})")
+    plt.title(f"Runtime vs Users ")
     plt.grid(True, linestyle="--", alpha=0.35)
     plt.xticks(xs)
     plt.legend(title="Method")

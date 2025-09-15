@@ -28,7 +28,7 @@ METHODS      = ["dp", "greedy", "hungarian", "mslb", "ga"]        # 要比較的
 USER_COUNTS  = [100, 150, 200, 250, 300]                          # x 軸
 RESULTS_DIR  = "results"                                          # 根目錄
 ALPHA_TOKEN  = "alpha1"                                           # 僅收 alpha=1（以檔名判斷）
-W_FILTER     = 2                                                  # 僅收 W=3
+W_FILTER     = 2                                                  # 僅收 W=3   <-- 若要 W=3，請改成 3
 Y_LIM        = (0.0, 0.5)                                        # y 軸範圍（可自行調整）
 DPI          = 200
 
@@ -40,8 +40,8 @@ OVERRIDES = {
 
 # ===== 輸出檔名 =====
 TIMESTAMP = datetime.now().strftime("%Y%m%dT%H%M%S")
-OUT_CSV   = os.path.join(RESULTS_DIR, "blocking_rate_summary_alpha1_W3.csv")
-OUT_PNG   = os.path.join(RESULTS_DIR, f"blocking_rate_alpha1_W3_{TIMESTAMP}.png")
+OUT_CSV   = os.path.join(RESULTS_DIR, f"blocking_rate_summary_{ALPHA_TOKEN}_W{W_FILTER}.csv")
+OUT_PNG   = os.path.join(RESULTS_DIR, f"blocking_rate_{ALPHA_TOKEN}_W{W_FILTER}_{TIMESTAMP}.png")
 
 # ===== 工具 =====
 def parse_w_from_name(s: str):
@@ -184,28 +184,35 @@ def main():
     df_rates.to_csv(OUT_CSV)
     print(f"[INFO] summary CSV saved to: {OUT_CSV}")
 
-    # 繪圖（每 method 不同 marker/linestyle，不指定顏色）
+    # -------------------------
+    # 繪圖（固定順序 + 指定顏色/marker/linestyle）
+    # -------------------------
+    desired_order = ["dp", "ga", "greedy", "hungarian", "mslb"]
     style_map = {
-        "dp":        {"marker": "o", "linestyle": "-"},
-        "greedy":    {"marker": "s", "linestyle": "--"},
-        "hungarian": {"marker": "^", "linestyle": "-."},
-        "mslb":      {"marker": "D", "linestyle": ":"},
-        "ga":        {"marker": "x", "linestyle": (0, (3, 1, 1, 1))},
+        "dp":        {"marker": "o", "linestyle": "-",  "color": "tab:blue"},
+        "ga":        {"marker": "s", "linestyle": "--", "color": "tab:orange"},
+        "greedy":    {"marker": "^", "linestyle": "-.", "color": "tab:green"},
+        "hungarian": {"marker": "D", "linestyle": ":",  "color": "tab:red"},
+        "mslb":      {"marker": "v", "linestyle": (0, (3, 1, 1, 1)), "color": "tab:purple"},
     }
 
     plt.figure(figsize=(10, 6))
     xs = USER_COUNTS
 
-    for method in METHODS:
-        y = df_rates[method]
-        if y.isna().all():
-            print(f"[WARN] no data to plot for method {method}; skipping.")
+    # 依 desired_order 畫圖（若某 method 無資料會跳過）
+    for m in desired_order:
+        if m not in METHODS:
             continue
-        style = style_map.get(method, {"marker": "o", "linestyle": "-"})
+        y = df_rates[m]
+        if y.isna().all():
+            print(f"[WARN] no data to plot for method {m}; skipping.")
+            continue
+        style = style_map.get(m, {"marker": "o", "linestyle": "-", "color": None})
         plt.plot(xs, y.values.astype(float),
                  marker=style["marker"],
                  linestyle=style["linestyle"],
-                 linewidth=2, markersize=7, label=method)
+                 color=style.get("color"),
+                 linewidth=2, markersize=7, label=m)
 
     plt.xlabel("Number of users")
     plt.ylabel("Blocking rate")
@@ -214,7 +221,7 @@ def main():
     plt.xticks(xs)
     if Y_LIM is not None:
         plt.ylim(*Y_LIM)
-    plt.legend(title="Method")
+    plt.legend(title="Method", loc="best")
     plt.tight_layout()
     plt.savefig(OUT_PNG, dpi=DPI)
     print(f"[INFO] plot saved to: {OUT_PNG}")
@@ -224,7 +231,7 @@ def main():
     except Exception:
         pass
 
-    print("\n=== Blocking rate summary (alpha=1, W=3) ===")
+    print(f"\n=== Blocking rate summary (alpha={ALPHA_TOKEN}, W={W_FILTER}) ===")
     print(df_rates)
     print("\n✅ Done.")
 

@@ -18,7 +18,6 @@ METHODS = ["dp", "greedy", "hungarian", "mslb", "ga"]  # 要畫的 method 列表
 OUT_CSV = os.path.join(RESULTS_DIR, f"blocking_rate_W{W_VALUE}_users{USERS}_by_alpha.csv")
 TIMESTAMP = datetime.now().strftime("%Y%m%dT%H%M%S")
 OUT_PNG = os.path.join(RESULTS_DIR, f"blocking_rate_W{W_VALUE}_users{USERS}_by_alpha_{TIMESTAMP}.png")
-
 # ---------- 幫助函式 ----------
 def extract_alpha_from_filename(fname):
     """
@@ -29,6 +28,13 @@ def extract_alpha_from_filename(fname):
     # regex: alpha[_-]?digits(.digits)?
     m = re.search(r"alpha[_\-]?([0-9]+(?:\.[0-9]+)?)", b)
     if not m:
+        # 也嘗試 α 或 Α 的情況（有些檔名可能包含 unicode alpha）
+        m2 = re.search(r"[α\u0391][_ -]?([0-9]+(?:\.[0-9]+)?)", b)
+        if m2:
+            try:
+                return float(m2.group(1))
+            except Exception:
+                return None
         return None
     try:
         return float(m.group(1))
@@ -60,18 +66,19 @@ def compute_mean_blocking_rate_from_file(path):
         return None
 
     # 找包含 block & rate 的欄位
-    cols = [c for c in df.columns if "block" in c.lower() and "rate" in c.lower()]
+    cols = [c for c in df.columns if ("block" in c.lower()) and ("rate" in c.lower())]
     if cols:
         try:
-            return float(df[cols[0]].mean())
+            # 若欄位是逐行的 blocking rate，取平均；若已是單一值也沒問題
+            return float(pd.to_numeric(df[cols[0]], errors="coerce").mean())
         except Exception:
             return None
 
     # 否則嘗試 blocked/total
     if ("blocked" in df.columns) and ("total" in df.columns):
         try:
-            tot_blocked = df["blocked"].sum()
-            tot = df["total"].sum()
+            tot_blocked = pd.to_numeric(df["blocked"], errors="coerce").sum()
+            tot = pd.to_numeric(df["total"], errors="coerce").sum()
             return float(tot_blocked / tot) if tot > 0 else 0.0
         except Exception:
             return None
@@ -117,12 +124,13 @@ for p in candidates:
         continue
     # if we already have an entry for this (method,alpha) compare mtimes and keep newest
     prev = results[method].get(alpha)
+    mtime = os.path.getmtime(p)
     if prev is None:
-        results[method][alpha] = (p, br, os.path.getmtime(p))
+        results[method][alpha] = (p, br, mtime)
     else:
         # prev is (path, br, mtime)
-        if os.path.getmtime(p) > prev[2]:
-            results[method][alpha] = (p, br, os.path.getmtime(p))
+        if mtime > prev[2]:
+            results[method][alpha] = (p, br, mtime)
 
 # ---------- 準備 DataFrame（index=alpha sorted, columns=methods） ----------
 if not alpha_set:
@@ -151,29 +159,38 @@ print(f"[INFO] saved summary CSV to: {OUT_CSV}")
 plt.figure(figsize=(9,6))
 x = alphas_sorted
 
-# plot each method as a separate line (different marker/linestyle)
+# 指定繪圖順序與樣式（包含顏色）
+desired_order = ["dp", "ga", "greedy", "hungarian", "mslb"]
 style_map = {
-    "dp":       {"marker":"o", "linestyle":"-"},
-    "greedy":   {"marker":"s", "linestyle":"--"},
-    "hungarian":{"marker":"^", "linestyle":"-."},
-    "mslb":     {"marker":"D", "linestyle":":"},
-    "ga":       {"marker":"x", "linestyle":(0, (3,1,1,1))}
+    "dp":        {"marker":"o", "linestyle":"-",  "color":"tab:blue"},
+    "ga":        {"marker":"s", "linestyle":"--", "color":"tab:orange"},
+    "greedy":    {"marker":"^", "linestyle":"-.", "color":"tab:green"},
+    "hungarian": {"marker":"D", "linestyle":":",  "color":"tab:red"},
+    "mslb":      {"marker":"v", "linestyle":(0, (3,1,1,1)), "color":"tab:purple"}
 }
 
-for method in METHODS:
-    y = df_rates[method].values.astype(float)
-    # skip if all NaN
-    if np.all(np.isnan(y)):
-        print(f"[WARN] no data for method {method}, skipping plot.")
+# 依 desired_order 畫圖（若 METHODS 中沒有也會自動跳過）
+# 先建立 col map（處理大小寫可能不同的情況）
+colname_map = {c.lower(): c for c in df_rates.columns}
+
+for m in desired_order:
+    if m not in colname_map:
         continue
-    style = style_map.get(method, {"marker":"o","linestyle":"-"})
-    plt.plot(x, y, label=method, marker=style["marker"], linestyle=style["linestyle"], linewidth=2, markersize=6)
+    col_actual = colname_map[m]
+    # safe extraction：轉 float 並保留 NaN
+    y = pd.to_numeric(df_rates[col_actual], errors="coerce").values.astype(float)
+    if np.all(np.isnan(y)):
+        print(f"[WARN] no data for method {m}, skipping plot.")
+        continue
+    style = style_map.get(m, {"marker":"o","linestyle":"-","color":None})
+    plt.plot(x, y, label=m, marker=style["marker"], linestyle=style["linestyle"],
+             color=style.get("color"), linewidth=2, markersize=6)
 
 plt.xlabel("alpha")
 plt.ylabel("Blocking rate")
 plt.title(f"Blocking rate vs alpha (W={W_VALUE}, users={USERS})")
 plt.grid(True, linestyle="--", alpha=0.3)
-plt.legend(title="Method")
+plt.legend(title="Method", loc="best")
 plt.tight_layout()
 plt.ylim(0, 0.15)
 
@@ -188,5 +205,5 @@ except Exception:
 # ---------- 印出表格以便檢查 ----------
 print("\n=== Blocking rate by alpha ===")
 print(df_rates)
- 
+
 print("\n✅ Done.")

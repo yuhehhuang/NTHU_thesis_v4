@@ -15,7 +15,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # ======== 可調參數 ========
-DEFAULT_W = 2
+DEFAULT_W = 3
 DEFAULT_USERS = 100
 STRICT_FILTER = True   # False=放寬：檔名沒寫 W 或 users 也接受；True=嚴格：一定要寫 W3 與 users100 才收
 OUT_DPI = 150
